@@ -1,12 +1,13 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -27,20 +28,7 @@ public class Window extends JFrame {
 	getContentPane().add(new SudokuBoard());
 	
 	
-	/*
-	 * JSplitPane jSplitPane = new JSplitPane(); JPanel leftPanel = new JPanel();
-	 * leftPanel.setLayout(new GridLayout(3,3)); JPanel rightPanel = new JPanel();
-	 * rightPanel.setLayout(new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS));
-	 * jSplitPane.setLeftComponent(leftPanel);
-	 * jSplitPane.setRightComponent(rightPanel); jSplitPane.setSize(800, 600);
-	 * 
-	 * JButton newGameBtn = new JButton("Nowa gra"); JButton resetBtn = new
-	 * JButton("Wyczyœæ"); JButton infoBtn = new JButton("Sprawd");
-	 * rightPanel.add(newGameBtn); rightPanel.add(resetBtn);
-	 * rightPanel.add(infoBtn);
-	 * 
-	 * getContentPane().add(jSplitPane, BorderLayout.CENTER);
-	 */
+	
     pack();
     setVisible(true);
 	}
@@ -55,15 +43,14 @@ public class Window extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 1;
             gbc.weightx = 1;
+            
             gbc.fill = GridBagConstraints.HORIZONTAL;
-
-            add(new JButton("Solve"), gbc);
+            gbc.insets = new Insets(20,20,20,20);
+            
+            
+            add(new JButton("Nowa gra"), gbc);
             gbc.gridy++;
-            add(new JButton("New"), gbc);
-            gbc.gridy++;
-            add(new JButton("Hint"), gbc);
-            gbc.gridy++;
-            add(new JButton("Reset"), gbc);
+            add(new JButton("SprawdŸ"), gbc);
 
         }
     }
@@ -82,7 +69,7 @@ public class Window extends JFrame {
 	        private JPanel[] panels;
 
 	        public SudokuBoard() {
-	            //setBorder(new EmptyBorder(4, 4, 4, 4));
+	            
 	            
 	            panels = new JPanel[9];
 	            fields = new JTextField[BOARD_ROWS][BOARD_COLUMNS];
@@ -97,33 +84,27 @@ public class Window extends JFrame {
 		            panels[i] = panel;
 		            add(panel);
 	            }
+	            int counter = 0;
 	            //kratki liczbowe
 	            for (int row = 0; row < BOARD_ROWS; row++) {
-	            	for (int col = 0; col < BOARD_COLUMNS; col++) {
+	            	
+	            	for (int col = 0; col < BOARD_COLUMNS; col++,counter++) {
 	            		
-	            		JTextField field = new JTextField(4);
+	            		JTextField field = new JTextField();
 	            		field.setHorizontalAlignment(SwingConstants.CENTER);
-	            		field.setText("["+ row + "]["+ col + "]");
+	            		field.setPreferredSize(new Dimension(100, 100));
+	            		
+	            		//field.setText("["+ row + "]["+ col + "]" + " " + counter);
 	            		fields[row][col] = field;
 	            		
-	            		//przypisanie do panelu grupuj¹cego
+	            		//przypisanie kratki do panelu grupuj¹cego
 	            		int block = (((row / 3) * 3) + (col / 3));
 	            		
 	            		panels[block].add(field);
 	            	}
 	            }
 	            
-				/*
-				 * for (int row = 0; row < GRID_ROWS; row++) { for (int col = 0; col <
-				 * GRID_COLUMNS; col++) { JPanel panel = new JPanel(new GridLayout(3, 3, 2, 2));
-				 * panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new
-				 * EmptyBorder(2, 2, 2, 2))); panels[row][col] = panel; add(panel);
-				 * 
-				 * for (int rowTxt = 0; rowTxt < GRID_ROWS; rowTxt++) { for (int colTxt = 0;
-				 * colTxt < GRID_COLUMNS; colTxt++) { JTextField field = new JTextField(4);
-				 * fields[rowTxt][] panel.add(fi)); } } //add(createBoard(fields, startRow,
-				 * startCol)); } }
-				 */
+				
 	        }
 	        }
 

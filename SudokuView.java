@@ -13,8 +13,8 @@ import javax.swing.border.LineBorder;
 
 
 
-public class Window extends JFrame {
-	public Window() {
+public class SudokuView extends JFrame {
+	public SudokuView() {
 		
 		
 		  
@@ -46,8 +46,7 @@ public class Window extends JFrame {
             
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(20,20,20,20);
-            
-            
+
             add(new JButton("Nowa gra"), gbc);
             gbc.gridy++;
             add(new JButton("Sprawdü"), gbc);
@@ -108,7 +107,8 @@ public class Window extends JFrame {
 	        }
 	        }
 
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(Window::new);
-}
+			/*
+			 * public static void main(String[] args) {
+			 * SwingUtilities.invokeLater(SudokuView::new); }
+			 */
 }

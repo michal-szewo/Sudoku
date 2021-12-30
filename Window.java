@@ -34,7 +34,7 @@ public class Window extends JFrame {
 	}
 
 
- public class MenuPane extends JPanel {
+	public class MenuPane extends JPanel {
 
         public MenuPane() {
             setBorder(new EmptyBorder(4, 4, 4, 4));

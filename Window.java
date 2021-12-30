@@ -73,27 +73,57 @@ public class Window extends JFrame {
 
 	        public static final int GRID_ROWS = 3;
 	        public static final int GRID_COLUMNS = 3;
+	        public static final int BOARD_ROWS = 9;
+	        public static final int BOARD_COLUMNS = 9;
+	        
+	        
 	        
 	        private JTextField[][] fields;
-	        private JPanel[][] panels;
+	        private JPanel[] panels;
 
 	        public SudokuBoard() {
 	            //setBorder(new EmptyBorder(4, 4, 4, 4));
-	            fields = new JTextField[GRID_ROWS*3][GRID_COLUMNS*3];
-	            panels = new JPanel[GRID_ROWS][GRID_COLUMNS];
+	            
+	            panels = new JPanel[9];
+	            fields = new JTextField[BOARD_ROWS][BOARD_COLUMNS];
 
 	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,2,2));
-	            for (int row = 0; row < GRID_ROWS; row++) {
-	                for (int col = 0; col < GRID_COLUMNS; col++) {
-	                	 JPanel panel = new JPanel(new GridLayout(3, 3, 2, 2));
-	                     panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new EmptyBorder(2, 2, 2, 2)));
-	                     panels[row][col] = panel;
-	                     add(panel);
-	                     //
-	                    
-	                    //add(createBoard(fields, startRow, startCol));
-	                }
+	            
+	            //panele agreguj¹ce kratki liczbowe
+	            for (int i=0 ; i < 9 ; i++) {
+		            JPanel panel = new JPanel(new GridLayout(3, 3));
+		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new EmptyBorder(2, 2, 2, 2)));
+		            panel.setBorder(new LineBorder(Color.GRAY, 2));
+		            panels[i] = panel;
+		            add(panel);
 	            }
+	            //kratki liczbowe
+	            for (int row = 0; row < BOARD_ROWS; row++) {
+	            	for (int col = 0; col < BOARD_COLUMNS; col++) {
+	            		
+	            		JTextField field = new JTextField(4);
+	            		field.setHorizontalAlignment(SwingConstants.CENTER);
+	            		field.setText("["+ row + "]["+ col + "]");
+	            		fields[row][col] = field;
+	            		
+	            		//przypisanie do panelu grupuj¹cego
+	            		int block = (((row / 3) * 3) + (col / 3));
+	            		
+	            		panels[block].add(field);
+	            	}
+	            }
+	            
+				/*
+				 * for (int row = 0; row < GRID_ROWS; row++) { for (int col = 0; col <
+				 * GRID_COLUMNS; col++) { JPanel panel = new JPanel(new GridLayout(3, 3, 2, 2));
+				 * panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new
+				 * EmptyBorder(2, 2, 2, 2))); panels[row][col] = panel; add(panel);
+				 * 
+				 * for (int rowTxt = 0; rowTxt < GRID_ROWS; rowTxt++) { for (int colTxt = 0;
+				 * colTxt < GRID_COLUMNS; colTxt++) { JTextField field = new JTextField(4);
+				 * fields[rowTxt][] panel.add(fi)); } } //add(createBoard(fields, startRow,
+				 * startCol)); } }
+				 */
 	        }
 	        }
 

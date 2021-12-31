@@ -24,8 +24,7 @@ public class SudokuModel {
 	merged.add(f1);
 	merged.add(f2);
 	Random rand = new Random();
-	int r= rand.nextInt(merged.size());
-	System.out.println("rand:" + r);	
+	int r= rand.nextInt(merged.size());	
 	return merged.get(r);
 	
 	}

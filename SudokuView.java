@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,19 +15,25 @@ import javax.swing.border.LineBorder;
 
 
 public class SudokuView extends JFrame {
-	public SudokuView() {
-		
-		
-		  
-         // frame.add(new SudokuBoard());
-		
-          
-      
+	private JTextField[][] fields;
+    private JPanel[] panels;
+    JButton newBtn;
+    JButton checkBtn;
+    Font f = new Font("Calibri", Font.BOLD, 30);
+    public static final int GRID_ROWS = 3;
+    public static final int GRID_COLUMNS = 3;
+    public static final int BOARD_ROWS = 9;
+    public static final int BOARD_COLUMNS = 9;
+    
+	public SudokuView(SudokuModel model) {
+	
+
+	SudokuModel m_model = model;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	setLayout(new BorderLayout());
 	getContentPane().add(new MenuPane(), BorderLayout.AFTER_LINE_ENDS);
 	getContentPane().add(new SudokuBoard());
-	
+	this.fillBoard(m_model.getBoard());
 	
 	
     pack();
@@ -46,10 +53,13 @@ public class SudokuView extends JFrame {
             
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(20,20,20,20);
-
-            add(new JButton("Nowa gra"), gbc);
+            
+            newBtn = new JButton("Nowa gra");
+            checkBtn = new JButton("Sprawdü");
+            
+            add(newBtn, gbc);
             gbc.gridy++;
-            add(new JButton("Sprawdü"), gbc);
+            add(checkBtn, gbc);
 
         }
     }
@@ -57,15 +67,7 @@ public class SudokuView extends JFrame {
 	 
 	 public class SudokuBoard extends JPanel {
 
-	        public static final int GRID_ROWS = 3;
-	        public static final int GRID_COLUMNS = 3;
-	        public static final int BOARD_ROWS = 9;
-	        public static final int BOARD_COLUMNS = 9;
-	        
-	        
-	        
-	        private JTextField[][] fields;
-	        private JPanel[] panels;
+
 
 	        public SudokuBoard() {
 	            
@@ -92,6 +94,7 @@ public class SudokuView extends JFrame {
 	            		JTextField field = new JTextField();
 	            		field.setHorizontalAlignment(SwingConstants.CENTER);
 	            		field.setPreferredSize(new Dimension(100, 100));
+	            		field.setFont(f);
 	            		
 	            		//field.setText("["+ row + "]["+ col + "]" + " " + counter);
 	            		fields[row][col] = field;
@@ -106,9 +109,26 @@ public class SudokuView extends JFrame {
 				
 	        }
 	        }
-
-			/*
-			 * public static void main(String[] args) {
-			 * SwingUtilities.invokeLater(SudokuView::new); }
-			 */
+	 
+	 //Miejsce na metody
+	 public void fillBoard(Integer[][] board) {
+		 for (int row = 0; row < BOARD_ROWS; row++) {
+         	
+         	for (int col = 0; col < BOARD_COLUMNS; col++) {
+         		if (board[row][col] ==null)
+         			{fields[row][col].setText("");	
+         		}
+         			else {
+         		fields[row][col].setText(board[row][col].toString());
+         		}
+         	}
+         	}
+	 }
+	 
+		/*
+		 * public void addNewGameListener(ActionListener ngl) {
+		 * newBtn.addActionListener(ngl); } public void addVerifyListener(ActionListener
+		 * vl) { checkBtn.addActionListener(vl); }
+		 */
+	 
 }

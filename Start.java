@@ -8,7 +8,7 @@ public class Start {
 
 	       	SudokuModel      model      = new SudokuModel();
 	        SudokuView       view       = new SudokuView(model);
-	        //SudokuController controller = new SudokuController(model, view);
+	        SudokuController controller = new SudokuController(model, view);
 
 	        view.setVisible(true);
 	    

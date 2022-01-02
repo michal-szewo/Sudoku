@@ -11,3 +11,6 @@
 /SudokuView$SudokuBoard.class
 /SudokuView.class
 /SudokuModel.class
+/SudokuController.class
+/SudokuController$NewGameListener.class
+/SudokuController$VerifyListener.class

@@ -11,15 +11,16 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
+import java.awt.event.*;
 
 
 public class SudokuView extends JFrame {
+	private SudokuModel m_model;
 	private JTextField[][] fields;
     private JPanel[] panels;
     JButton newBtn;
     JButton checkBtn;
-    Font f = new Font("Calibri", Font.BOLD, 30);
+    Font f = new Font("Calibri", Font.BOLD, 25);
     public static final int GRID_ROWS = 3;
     public static final int GRID_COLUMNS = 3;
     public static final int BOARD_ROWS = 9;
@@ -28,7 +29,7 @@ public class SudokuView extends JFrame {
 	public SudokuView(SudokuModel model) {
 	
 
-	SudokuModel m_model = model;
+	m_model = model;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	setLayout(new BorderLayout());
 	getContentPane().add(new MenuPane(), BorderLayout.AFTER_LINE_ENDS);
@@ -93,7 +94,7 @@ public class SudokuView extends JFrame {
 	            		
 	            		JTextField field = new JTextField();
 	            		field.setHorizontalAlignment(SwingConstants.CENTER);
-	            		field.setPreferredSize(new Dimension(100, 100));
+	            		field.setPreferredSize(new Dimension(60, 60));
 	            		field.setFont(f);
 	            		
 	            		//field.setText("["+ row + "]["+ col + "]" + " " + counter);
@@ -125,10 +126,19 @@ public class SudokuView extends JFrame {
          	}
 	 }
 	 
-		/*
-		 * public void addNewGameListener(ActionListener ngl) {
-		 * newBtn.addActionListener(ngl); } public void addVerifyListener(ActionListener
-		 * vl) { checkBtn.addActionListener(vl); }
-		 */
+	 
+	 public void showError(String errMessage) {
+	        JOptionPane.showMessageDialog(this, errMessage);
+	    }
+	 
+		
+	 public void addNewGameListener(ActionListener ngl) {
+		newBtn.addActionListener(ngl);
+	 }
+	
+	 public void addVerifyListener(ActionListener vl) {
+		checkBtn.addActionListener(vl);
+	 }
+		
 	 
 }

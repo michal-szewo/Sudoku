@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class SudokuModel {
 	private Integer[][] board;
+	public static final int N = 9;
+	boolean[][] invalidFields;
 	
 	public SudokuModel() {
 		board = initiateBoard();
@@ -34,6 +36,125 @@ public class SudokuModel {
 	public Integer[][] getBoard() {
 		return board;
 	}
+	
+	public static boolean isInRange(Integer[][] board)
+	{
+	     
+	    
+	    for(int i = 0; i < N; i++)
+	    {
+	        for(int j = 0; j < N; j++)
+	        {
+	             
+	           
+	            if (board[i][j] <= 0 ||
+	                board[i][j] > 9)
+	            {
+	               
+	            	return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
+	// walidacja wypelnionej planszy
+		public static boolean isValidSudoku(Integer[][] board)
+		{
+		     
+		   
+		    if (isInRange(board) == false)
+		    {
+		        return false;
+		    }
+
+		 
+		    // Tablica dla unikatowych wartosci
+		    // od 1 do N
+		    boolean[] unique = new boolean[N + 1];
+		 
+		    // Weryfikacja horyzontalna
+		    for(int i = 0; i < N; i++)
+		    {
+
+		        Arrays.fill(unique, false);
+
+		        for(int j = 0; j < N; j++)
+		        {
+		            
+		            int Z = board[i][j];
+		 
+		            
+		            if (unique[Z])
+		            {
+		                return false;
+		            }
+		            unique[Z] = true;
+		        }
+		    }
+		 
+		    // Weryfikacja w pionie 
+		    for(int i = 0; i < N; i++)
+		    {
+		       
+		        Arrays.fill(unique, false);
+		 
+		        // przejscie przez wszystkie wiersze kolumny
+		        for(int j = 0; j < N; j++)
+		        {
+		             
+		            
+		            int Z = board[j][i];
+		 
+		            
+		            if (unique[Z])
+		            {
+		                return false;
+		            }
+		            unique[Z] = true;
+		        }
+		    }
+		 
+		    // Weryfikacja blokowa
+		    // size 3 * 3 in board[][] array
+		    for(int i = 0; i < N - 2; i += 3)
+		    {
+		         
+		        // j to pierwsza kolumna kazdego bloku 3x3
+
+		        for(int j = 0; j < N - 2; j += 3)
+		        {
+		             
+		           
+		            Arrays.fill(unique, false);
+		 
+		            // Przejdz przez biezacy blok
+		            for(int k = 0; k < 3; k++)
+		            {
+		                for(int l = 0; l < 3; l++)
+		                {
+		                     
+		                    // Numer wiersza biezacego bloku
+		                    int X = i + k;
+		 
+		                    // Numer kolumny biezacego bloku
+		                    int Y = j + l;
+		 
+		                    int Z = board[X][Y];
+		                 
+		                    if (unique[Z])
+		                    {
+		                        return false;
+		                    }
+		                    unique[Z] = true;
+		                }
+		            }
+		        }
+		    }
+		 
+		    // jesli wszystko ok
+		    return true;
+		}
+	
 	
 	
 	public static void main(String[] args) throws Exception {

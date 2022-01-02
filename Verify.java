@@ -87,35 +87,28 @@ public class Verify {
 	    for(int i = 0; i < N - 2; i += 3)
 	    {
 	         
-	        // j stores first column of
-	        // each 3 * 3 block
+	        // j to pierwsza kolumna kazdego bloku 3x3
+
 	        for(int j = 0; j < N - 2; j += 3)
 	        {
 	             
-	            // Initialize unique[]
-	            // array to false
+	           
 	            Arrays.fill(unique, false);
 	 
-	            // Traverse current block
+	            // Przejdz przez biezacy blok
 	            for(int k = 0; k < 3; k++)
 	            {
 	                for(int l = 0; l < 3; l++)
 	                {
 	                     
-	                    // Stores row number
-	                    // of current block
+	                    // Numer wiersza biezacego bloku
 	                    int X = i + k;
 	 
-	                    // Stores column number
-	                    // of current block
+	                    // Numer kolumny biezacego bloku
 	                    int Y = j + l;
 	 
-	                    // Stores the value
-	                    // of board[X][Y]
 	                    int Z = board[X][Y];
-	 
-	                    // Check if current block
-	                    // stores duplicate value
+	                 
 	                    if (unique[Z])
 	                    {
 	                        return false;
@@ -166,6 +159,6 @@ public static void main(String[] args) throws Exception {
     //System.out.println(sudokuCheck(f1));
     System.out.println(isValidSudoku(f));
     System.out.println(isValidSudoku(f1));
-    System.out.println(isValidSudoku(f1));
+    System.out.println(isValidSudoku(f2));
 }
 }

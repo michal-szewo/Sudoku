@@ -5,10 +5,18 @@ import java.util.Random;
 public class SudokuModel {
 	private Integer[][] board;
 	public static final int N = 9;
-	boolean[][] invalidFields;
+	//private ArrayList<int[]> invalidFields = null;
+	private boolean[][] invalidFields = new boolean[N][N];
 	
 	public SudokuModel() {
 		board = initiateBoard();
+		for(int i = 0; i < N; i++)
+		    {
+		        for(int j = 0; j < N; j++)
+		        {
+		        	invalidFields[i][j] = false;
+		        }
+		    }
 	}
 	
 	public Integer[][] initiateBoard(){  
@@ -21,13 +29,13 @@ public class SudokuModel {
 		Integer[][] f2 = {{4,2,9,8,1,3,5,6,7}, {5,1,6,4,7,2,9,3,8}, {7,8,3,6,5,9,2,4,1},
              {6,7,2,1,3,4,8,5,9}, {3,9,5,2,8,6,1,7,4}, {8,4,1,7,9,5,6,2,3}, 
              {1,5,8,3,null,7,4,9,2}, {9,3,4,5,2,8,7,1,6}, {2,6,7,9,4,1,3,8,5}};
-	ArrayList<Integer[][]> merged = new ArrayList<>();
-	merged.add(f);
-	merged.add(f1);
-	merged.add(f2);
-	Random rand = new Random();
-	int r= rand.nextInt(merged.size());	
-	return merged.get(r);
+		ArrayList<Integer[][]> merged = new ArrayList<>();
+		merged.add(f);
+		merged.add(f1);
+		merged.add(f2);
+		Random rand = new Random();
+		int r= rand.nextInt(merged.size());	
+		return merged.get(r);
 	
 	}
 	public void changeBoard() {
@@ -37,36 +45,48 @@ public class SudokuModel {
 		return board;
 	}
 	
-	public static boolean isInRange(Integer[][] board)
-	{
-	     
-	    
-	    for(int i = 0; i < N; i++)
-	    {
-	        for(int j = 0; j < N; j++)
-	        {
-	             
-	           
-	            if (board[i][j] <= 0 ||
-	                board[i][j] > 9)
-	            {
-	               
-	            	return false;
-	            }
-	        }
-	    }
-	    return true;
+	//walidacja
+	
+	public static boolean isNumeric(String text) {
+		
+		try {
+	         Integer.parseInt(text);
+	         return true;
+	      } catch (NumberFormatException e) {
+	         return false;
+	      }
 	}
-	// walidacja wypelnionej planszy
-		public static boolean isValidSudoku(Integer[][] board)
+	
+	public static boolean isNumberInRange(Integer number) {
+		
+		if (number<=1 || number <=9) return true;
+		return false;
+	}
+	
+	/*
+	 * public static boolean isInRange(Integer[][] board) {
+	 * 
+	 * 
+	 * for(int i = 0; i < N; i++) { for(int j = 0; j < N; j++) {
+	 * 
+	 * 
+	 * if (board[i][j] <= 0 || board[i][j] > 9) {
+	 * 
+	 * return false; } } } return true; }
+	 */
+	// walidacja poprawnie wypelnionej planszy
+		
+	
+		public boolean[][] getInvalidFields(Integer[][] board)
 		{
-		     
-		   
-		    if (isInRange(board) == false)
+			for(int i = 0; i < N; i++)
 		    {
-		        return false;
+		        for(int j = 0; j < N; j++)
+		        {
+		        	invalidFields[i][j] = false;
+		        }
 		    }
-
+		   
 		 
 		    // Tablica dla unikatowych wartosci
 		    // od 1 do N
@@ -85,8 +105,10 @@ public class SudokuModel {
 		 
 		            
 		            if (unique[Z])
-		            {
-		                return false;
+		            {	
+		            	for(int x = 0; x < N;x++) invalidFields[i][x] = true;
+		                break;
+		                
 		            }
 		            unique[Z] = true;
 		        }
@@ -101,14 +123,13 @@ public class SudokuModel {
 		        // przejscie przez wszystkie wiersze kolumny
 		        for(int j = 0; j < N; j++)
 		        {
-		             
-		            
+
 		            int Z = board[j][i];
-		 
-		            
+
 		            if (unique[Z])
 		            {
-		                return false;
+		            	for(int x = 0; x < N;x++) invalidFields[x][i] = true;
+		                break;
 		            }
 		            unique[Z] = true;
 		        }
@@ -128,6 +149,7 @@ public class SudokuModel {
 		            Arrays.fill(unique, false);
 		 
 		            // Przejdz przez biezacy blok
+		            block:
 		            for(int k = 0; k < 3; k++)
 		            {
 		                for(int l = 0; l < 3; l++)
@@ -143,7 +165,13 @@ public class SudokuModel {
 		                 
 		                    if (unique[Z])
 		                    {
-		                        return false;
+		                    	for(int x = i; x < i+3;x++) {
+		                    		for(int y = j;y < j+3;y++) {
+		                    			invalidFields[x][y] = true;
+		                    		}
+		                    		
+		                    	}
+				                break block;
 		                    }
 		                    unique[Z] = true;
 		                }
@@ -152,11 +180,21 @@ public class SudokuModel {
 		    }
 		 
 		    // jesli wszystko ok
-		    return true;
+		    return invalidFields;
 		}
 	
-	
-	
+	public boolean isValidSudoku(Integer[][] board) {
+		boolean[][] SudokuBoard = this.getInvalidFields(board);
+		 for(int i = 0; i < N; i++)
+		    {
+		        for(int j = 0; j < N; j++)
+		        {
+		        	if(SudokuBoard[i][j]==true) return false;
+		        }
+		    }
+		return true;
+	}
+		
 	public static void main(String[] args) throws Exception {
 	   SudokuModel s = new SudokuModel();
 	   Integer[][] list = s.initiateBoard();
@@ -198,6 +236,9 @@ public class SudokuModel {
 	    //System.out.println(sudokuCheck(f));
 	    //System.out.println(sudokuCheck(f1));
 	    
-	}	
+		
+	}
+
+	
 	
 }

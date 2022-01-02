@@ -38,7 +38,7 @@ public class Verify {
 	 
 	    // Tablica dla unikatowych wartosci
 	    // od 1 do N
-	    boolean[] unique = new boolean[N + 1];
+	    boolean[] unique = new boolean[N+1];
 	 
 	    // Weryfikacja horyzontalna
 	    for(int i = 0; i < N; i++)

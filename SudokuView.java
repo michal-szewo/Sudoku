@@ -22,9 +22,9 @@ public class SudokuView extends JFrame {
     JButton checkBtn;
     Font f = new Font("Calibri", Font.BOLD, 25);
     public static final int GRID_ROWS = 3;
-    public static final int GRID_COLUMNS = 3;
-    public static final int BOARD_ROWS = 9;
-    public static final int BOARD_COLUMNS = 9;
+	public static final int GRID_COLUMNS = 3;
+	public static final int BOARD_ROWS = 9;
+	public static final int BOARD_COLUMNS = 9;
     
 	public SudokuView(SudokuModel model) {
 	
@@ -86,18 +86,18 @@ public class SudokuView extends JFrame {
 		            panels[i] = panel;
 		            add(panel);
 	            }
-	            int counter = 0;
-	            //kratki liczbowe
+	            
+	            //kratki liczbowe (bloki)
 	            for (int row = 0; row < BOARD_ROWS; row++) {
 	            	
-	            	for (int col = 0; col < BOARD_COLUMNS; col++,counter++) {
+	            	for (int col = 0; col < BOARD_COLUMNS; col++) {
 	            		
 	            		JTextField field = new JTextField();
 	            		field.setHorizontalAlignment(SwingConstants.CENTER);
 	            		field.setPreferredSize(new Dimension(60, 60));
 	            		field.setFont(f);
 	            		
-	            		//field.setText("["+ row + "]["+ col + "]" + " " + counter);
+	            		
 	            		fields[row][col] = field;
 	            		
 	            		//przypisanie kratki do panelu grupuj¹cego
@@ -113,6 +113,8 @@ public class SudokuView extends JFrame {
 	 
 	 //Miejsce na metody
 	 public void fillBoard(Integer[][] board) {
+		 
+		 this.eraseInvalidFields();
 		 for (int row = 0; row < BOARD_ROWS; row++) {
          	
          	for (int col = 0; col < BOARD_COLUMNS; col++) {
@@ -127,13 +129,54 @@ public class SudokuView extends JFrame {
 	 }
 	 
 	 
-	 public void showError(String errMessage) {
-	        JOptionPane.showMessageDialog(this, errMessage);
+	 public void showMessage(String Message) {
+        JOptionPane.showMessageDialog(this, Message);
+    }
+	 public void showConfirm(String errMessage) {
+	        int confirm = JOptionPane.showConfirmDialog(this, errMessage , null, JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+	        if (confirm == JOptionPane.YES_OPTION)
+	        {
+	            this.eraseInvalidFields();
+	        }
 	    }
 	 
-		
+		/*
+		 * public void addVerifyRangeListener(ActionListener vrl) { for (int row = 0;
+		 * row < BOARD_ROWS; row++) {
+		 * 
+		 * for (int col = 0; col < BOARD_COLUMNS; col++) {
+		 * fields[row][col].addActionListener(vrl); } }
+		 * 
+		 * }
+		 */
+	 
+	 public String[][] getBoardValues(){
+		 String[][] inputValues = new String[BOARD_ROWS][BOARD_COLUMNS];
+		 
+		 for (int row = 0; row < BOARD_ROWS; row++) {
+	         	
+	         	for (int col = 0; col < BOARD_COLUMNS; col++) {
+	         		inputValues[row][col] = fields[row][col].getText();
+	         	}
+		 }
+	     return inputValues;
+	 }
+	 
+	 public void markInvalidField(int row, int col) {
+		 fields[row][col].setBackground(Color.RED);
+	 }
+	 public void eraseInvalidFields() {
+		 for (int row = 0; row < BOARD_ROWS; row++) {
+	         	
+	         	for (int col = 0; col < BOARD_COLUMNS; col++) {
+	         		fields[row][col].setBackground(Color.WHITE);
+	         	}
+		 }
+		 
+	 }
+		 
 	 public void addNewGameListener(ActionListener ngl) {
-		newBtn.addActionListener(ngl);
+		 newBtn.addActionListener(ngl);
 	 }
 	
 	 public void addVerifyListener(ActionListener vl) {

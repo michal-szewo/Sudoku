@@ -4,20 +4,17 @@ public class Verify {
 	
 	static int N = 9;
 	 
-	// Function to check if all elements
-	// of the board[][] array store
-	// value in the range[1, 9]
+	//sprawdzamy, czy liczby w zasiegu
 	public static boolean isInRange(Integer[][] board)
 	{
 	     
-	    // Traverse board[][] array
+	    
 	    for(int i = 0; i < N; i++)
 	    {
 	        for(int j = 0; j < N; j++)
 	        {
 	             
-	            // Check if board[i][j]
-	            // lies in the range
+	           
 	            if (board[i][j] <= 0 ||
 	                board[i][j] > 9)
 	            {
@@ -29,42 +26,32 @@ public class Verify {
 	    return true;
 	}
 	
-	// Function to check if the solution
-	// of sudoku puzzle is valid or not
-	public static boolean isValidSudoku(Integer board[][])
+	// walidacja wypelnionej planszy
+	public static boolean isValidSudoku(Integer[][] board)
 	{
 	     
-	    // Check if all elements of board[][]
-	    // stores value in the range[1, 9]
+	   
 	    if (isInRange(board) == false)
 	    {
 	        return false;
 	    }
 	 
-	    // Stores unique value
-	    // from 1 to N
-	    boolean[] unique = new boolean[N + 1];
+	    // Tablica dla unikatowych wartosci
+	    // od 1 do N
+	    boolean[] unique = new boolean[N+1];
 	 
-	    // Traverse each row of
-	    // the given array
+	    // Weryfikacja horyzontalna
 	    for(int i = 0; i < N; i++)
 	    {
-	         
-	        // Initialize unique[]
-	        // array to false
+
 	        Arrays.fill(unique, false);
-	 
-	        // Traverse each column
-	        // of current row
+
 	        for(int j = 0; j < N; j++)
 	        {
-	             
-	            // Stores the value
-	            // of board[i][j]
+	            
 	            int Z = board[i][j];
 	 
-	            // Check if current row
-	            // stores duplicate value
+	            
 	            if (unique[Z])
 	            {
 	                return false;
@@ -73,26 +60,20 @@ public class Verify {
 	        }
 	    }
 	 
-	    // Traverse each column of
-	    // the given array
+	    // Weryfikacja w pionie 
 	    for(int i = 0; i < N; i++)
 	    {
-	         
-	        // Initialize unique[]
-	        // array to false
+	       
 	        Arrays.fill(unique, false);
 	 
-	        // Traverse each row
-	        // of current column
+	        // przejscie przez wszystkie wiersze kolumny
 	        for(int j = 0; j < N; j++)
 	        {
 	             
-	            // Stores the value
-	            // of board[j][i]
+	            
 	            int Z = board[j][i];
 	 
-	            // Check if current column
-	            // stores duplicate value
+	            
 	            if (unique[Z])
 	            {
 	                return false;
@@ -101,40 +82,33 @@ public class Verify {
 	        }
 	    }
 	 
-	    // Traverse each block of
+	    // Weryfikacja blokowa
 	    // size 3 * 3 in board[][] array
 	    for(int i = 0; i < N - 2; i += 3)
 	    {
 	         
-	        // j stores first column of
-	        // each 3 * 3 block
+	        // j to pierwsza kolumna kazdego bloku 3x3
+
 	        for(int j = 0; j < N - 2; j += 3)
 	        {
 	             
-	            // Initialize unique[]
-	            // array to false
+	           
 	            Arrays.fill(unique, false);
 	 
-	            // Traverse current block
+	            // Przejdz przez biezacy blok
 	            for(int k = 0; k < 3; k++)
 	            {
 	                for(int l = 0; l < 3; l++)
 	                {
 	                     
-	                    // Stores row number
-	                    // of current block
+	                    // Numer wiersza biezacego bloku
 	                    int X = i + k;
 	 
-	                    // Stores column number
-	                    // of current block
+	                    // Numer kolumny biezacego bloku
 	                    int Y = j + l;
 	 
-	                    // Stores the value
-	                    // of board[X][Y]
 	                    int Z = board[X][Y];
-	 
-	                    // Check if current block
-	                    // stores duplicate value
+	                 
 	                    if (unique[Z])
 	                    {
 	                        return false;
@@ -145,7 +119,7 @@ public class Verify {
 	        }
 	    }
 	 
-	    // If all conditions satisfied
+	    // jesli wszystko ok
 	    return true;
 	}
 	
@@ -185,6 +159,6 @@ public static void main(String[] args) throws Exception {
     //System.out.println(sudokuCheck(f1));
     System.out.println(isValidSudoku(f));
     System.out.println(isValidSudoku(f1));
-    System.out.println(isValidSudoku(f1));
+    System.out.println(isValidSudoku(f2));
 }
 }

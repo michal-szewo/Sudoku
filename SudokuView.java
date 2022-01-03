@@ -56,7 +56,7 @@ public class SudokuView extends JFrame {
             gbc.insets = new Insets(20,20,20,20);
             
             newBtn = new JButton("Nowa gra");
-            checkBtn = new JButton("SprawdŸ");
+            checkBtn = new JButton("SprawdÅº");
             
             add(newBtn, gbc);
             gbc.gridy++;
@@ -78,7 +78,7 @@ public class SudokuView extends JFrame {
 
 	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,2,2));
 	            
-	            //panele agreguj¹ce kratki liczbowe
+	            //panele agregujï¿½ce kratki liczbowe
 	            for (int i=0 ; i < 9 ; i++) {
 		            JPanel panel = new JPanel(new GridLayout(3, 3));
 		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new EmptyBorder(2, 2, 2, 2)));
@@ -100,7 +100,7 @@ public class SudokuView extends JFrame {
 	            		
 	            		fields[row][col] = field;
 	            		
-	            		//przypisanie kratki do panelu grupuj¹cego
+	            		//przypisanie kratki do panelu grupujï¿½cego
 	            		int block = (((row / 3) * 3) + (col / 3));
 	            		
 	            		panels[block].add(field);

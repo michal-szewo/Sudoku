@@ -57,7 +57,7 @@ public class SudokuController {
     		}
     		
     		if (outOfRange)
-    			m_view.showMessage("Na czerwono zaznaczono wartoœci spoza zakresu 1-9.");
+    			m_view.showOption("Na czerwono zaznaczono wartoœci spoza zakresu 1-9.");
     		else{
     			if (m_model.isValidSudoku(convertedValues))
     				m_view.showMessage("Gratulacje!!! Rozwi¹za³eœ Sudoku.");
@@ -72,7 +72,7 @@ public class SudokuController {
 			       				  }
 	    					}
 	    				}
-    				m_view.showMessage("W zaznaczonych obszarach Sudoku wykryto zdublowane wartosci.");
+    				m_view.showOption("W zaznaczonych obszarach Sudoku wykryto zdublowane wartoœci.");
     			};
 
     		}

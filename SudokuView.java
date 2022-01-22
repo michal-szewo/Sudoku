@@ -18,8 +18,9 @@ public class SudokuView extends JFrame {
 	private SudokuModel m_model;
 	private JTextField[][] fields;
     private JPanel[] panels;
-    JButton newBtn;
-    JButton checkBtn;
+    private JButton newBtn;
+    private JButton checkBtn;
+    
     Font f = new Font("Calibri", Font.BOLD, 25);
     public static final int GRID_ROWS = 3;
 	public static final int GRID_COLUMNS = 3;
@@ -36,7 +37,7 @@ public class SudokuView extends JFrame {
 	getContentPane().add(new SudokuBoard());
 	this.fillBoard(m_model.getBoard());
 	
-	
+	this.setMinimumSize(new Dimension(600, 500));
     pack();
     setVisible(true);
 	}
@@ -58,9 +59,11 @@ public class SudokuView extends JFrame {
             newBtn = new JButton("Nowa gra");
             checkBtn = new JButton("Sprawdź");
             
+            
             add(newBtn, gbc);
             gbc.gridy++;
             add(checkBtn, gbc);
+            
 
         }
     }
@@ -69,16 +72,16 @@ public class SudokuView extends JFrame {
 	 public class SudokuBoard extends JPanel {
 
 
-
 	        public SudokuBoard() {
 	            
 	            
 	            panels = new JPanel[9];
 	            fields = new JTextField[BOARD_ROWS][BOARD_COLUMNS];
+	            
 
 	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,2,2));
 	            
-	            //panele agreguj�ce kratki liczbowe
+	            //panele agregujące kratki liczbowe
 	            for (int i=0 ; i < 9 ; i++) {
 		            JPanel panel = new JPanel(new GridLayout(3, 3));
 		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new EmptyBorder(2, 2, 2, 2)));
@@ -100,7 +103,7 @@ public class SudokuView extends JFrame {
 	            		
 	            		fields[row][col] = field;
 	            		
-	            		//przypisanie kratki do panelu grupuj�cego
+	            		//przypisanie kratki do panelu grupującego
 	            		int block = (((row / 3) * 3) + (col / 3));
 	            		
 	            		panels[block].add(field);
@@ -131,24 +134,32 @@ public class SudokuView extends JFrame {
 	 
 	 public void showMessage(String Message) {
         JOptionPane.showMessageDialog(this, Message);
-    }
-	 public void showConfirm(String errMessage) {
-	        int confirm = JOptionPane.showConfirmDialog(this, errMessage , null, JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+	 }
+	 public void showConfirm(String Message) {
+	        int confirm = JOptionPane.showConfirmDialog(this, Message , null, JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 	        if (confirm == JOptionPane.YES_OPTION)
 	        {
 	            this.eraseInvalidFields();
 	        }
 	    }
 	 
-		/*
-		 * public void addVerifyRangeListener(ActionListener vrl) { for (int row = 0;
-		 * row < BOARD_ROWS; row++) {
-		 * 
-		 * for (int col = 0; col < BOARD_COLUMNS; col++) {
-		 * fields[row][col].addActionListener(vrl); } }
-		 * 
-		 * }
-		 */
+	
+	 public void showOption(String Message) {
+		 Object[] options = {"Usuń zaznaczenie",
+                 "Pozostaw zaznaczenie"
+                 };
+	        int n = JOptionPane.showOptionDialog(this,
+	        		Message,
+	        		"Błędne pola", JOptionPane.YES_NO_OPTION,
+	        	    JOptionPane.QUESTION_MESSAGE,
+	        	    null,     //do not use a custom Icon
+	        	    options,  //the titles of buttons
+	        	    options[0]);
+	        if (n == JOptionPane.YES_OPTION)
+	        {
+	            this.eraseInvalidFields();
+	        }
+	    }
 	 
 	 public String[][] getBoardValues(){
 		 String[][] inputValues = new String[BOARD_ROWS][BOARD_COLUMNS];

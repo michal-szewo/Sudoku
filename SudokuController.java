@@ -15,7 +15,7 @@ public class SudokuController {
         //... Add listeners to the view.
         view.addNewGameListener(new NewGameListener());
         view.addVerifyListener(new VerifyListener());
-        //view.addVerifyRangeListener(new VerifyRangeListener());
+        view.addInfoListener(new InfoListener());
     }
     
     class NewGameListener implements ActionListener{
@@ -57,10 +57,10 @@ public class SudokuController {
     		}
     		
     		if (outOfRange)
-    			m_view.showOption("Na czerwono zaznaczono wartoúci spoza zakresu 1-9.");
+    			m_view.showOption("Na czerwono zaznaczono warto≈õci spoza zakresu 1-9.");
     		else{
     			if (m_model.isValidSudoku(convertedValues))
-    				m_view.showMessage("Gratulacje!!! Rozwiπza≥eú Sudoku.");
+    				m_view.showMessage("Gratulacje!!! RozwiƒÖza≈Çe≈õ Sudoku.");
     			else
     			{
     			
@@ -72,29 +72,18 @@ public class SudokuController {
 			       				  }
 	    					}
 	    				}
-    				m_view.showOption("W zaznaczonych obszarach Sudoku wykryto zdublowane wartoúci.");
+    				m_view.showOption("W zaznaczonych obszarach Sudoku wykryto zdublowane warto≈õci.");
     			};
 
     		}
     	}
-    
-	/*
-	 * class VerifyRangeListener implements ActionListener{ public void
-	 * actionPerformed(ActionEvent e) { String[][] values; values =
-	 * m_view.getBoardValues(); Integer[][] convertedValues = new Integer[9][9];
-	 * 
-	 * try { for (int row = 0; row < 9; row++) {
-	 * 
-	 * for (int col = 0; col < 9; col++) { convertedValues[row][col] =
-	 * Integer.parseInt(values[row][col]); }
-	 * 
-	 * } } catch (NumberFormatException e1) {
-	 * m_view.showError("Nieprawid≥owa wartoúÊ");
-	 * 
-	 * }
-	 * 
-	 * } }
-	 */
-  
     }
+    
+    	class InfoListener implements ActionListener{
+        	public void actionPerformed(ActionEvent e) {
+        		m_view.showMessage("Nazwa: Sudoku Java Swing\nAutor: Micha≈Ç Szeworski");
+        	}
+    	}
+  
+    
 }

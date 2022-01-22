@@ -20,6 +20,7 @@ public class SudokuView extends JFrame {
     private JPanel[] panels;
     private JButton newBtn;
     private JButton checkBtn;
+    private JButton infoBtn;
     
     Font f = new Font("Calibri", Font.BOLD, 25);
     public static final int GRID_ROWS = 3;
@@ -58,12 +59,14 @@ public class SudokuView extends JFrame {
             
             newBtn = new JButton("Nowa gra");
             checkBtn = new JButton("Sprawdź");
+            infoBtn = new JButton("O grze");
             
             
             add(newBtn, gbc);
             gbc.gridy++;
             add(checkBtn, gbc);
-            
+            gbc.gridy++;
+            add(infoBtn, gbc);
 
         }
     }
@@ -193,6 +196,8 @@ public class SudokuView extends JFrame {
 	 public void addVerifyListener(ActionListener vl) {
 		checkBtn.addActionListener(vl);
 	 }
-		
+	 public void addInfoListener(ActionListener in) {
+			infoBtn.addActionListener(in);
+		 }	
 	 
 }

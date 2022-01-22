@@ -15,3 +15,5 @@
 /SudokuController$NewGameListener.class
 /SudokuController$VerifyListener.class
 /SudokuController$VerifyRangeListener.class
+/SudokuController$VerifyListener$InfoListener.class
+/SudokuController$InfoListener.class

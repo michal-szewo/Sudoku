@@ -42,7 +42,7 @@ public class SudokuView extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	setLayout(new BorderLayout());
 	getContentPane().add(new MenuPane(this), BorderLayout.AFTER_LINE_ENDS);
-	getContentPane().add(new SudokuBoard());
+	getContentPane().add(new SudokuBoard(this));
 	this.fillBoard(m_model.getBoard());
 	
 	this.setMinimumSize(new Dimension(600, 500));
@@ -54,52 +54,7 @@ public class SudokuView extends JFrame {
 	
 	 
 	 
-	 public class SudokuBoard extends JPanel {
-
-
-	        public SudokuBoard() {
-	            
-	            
-	            panels = new JPanel[9];
-	            fields = new JTextField[BOARD_ROWS][BOARD_COLUMNS];
-	            
-
-	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,4,4));
-	            
-	            //panele agregujące kratki liczbowe
-	            for (int i=0 ; i < 9 ; i++) {
-		            JPanel panel = new JPanel(new GridLayout(3, 3));
-		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 3), new EmptyBorder(2, 2, 2, 2)));
-		            panel.setBorder(new LineBorder(Color.BLACK, 3));
-		            panels[i] = panel;
-		            add(panel);
-	            }
-	            
-	            //kratki liczbowe (bloki)
-	            for (int row = 0; row < BOARD_ROWS; row++) {
-	            	
-	            	for (int col = 0; col < BOARD_COLUMNS; col++) {
-	            		
-	            		JTextField field = new JTextField();
-	            		field.setHorizontalAlignment(SwingConstants.CENTER);
-	            		field.setPreferredSize(new Dimension(60, 60));
-	            		field.setFont(f);
-	            		
-	            		
-	            		
-	            		fields[row][col] = field;
-	            		
-	            		//przypisanie kratki do panelu grupującego
-	            		int block = (((row / 3) * 3) + (col / 3));
-	            		
-	            		panels[block].add(field);
-	            		field.setBorder(new LineBorder(Color.BLACK, 1));
-	            	}
-	            }
-	            
-				
-	        }
-	        }
+	 
 	 
 	 //Miejsce na metody
 	 public void fillBoard(Integer[][] board) {

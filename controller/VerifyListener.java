@@ -45,10 +45,10 @@ class VerifyListener implements ActionListener{
     		}
     		
     		if (outOfRange)
-    			m_view.showOption("Na czerwono zaznaczono wartoúci spoza zakresu 1-9.");
+    			m_view.showOption("Na czerwono zaznaczono warto≈õci spoza zakresu 1-9.");
     		else{
     			if (m_model.isValidSudoku(convertedValues))
-    				m_view.showMessage("Gratulacje!!! Rozwiπza≥eú Sudoku.","Wygrana");
+    				m_view.showMessage("Gratulacje!!! RozwiƒÖza≈Çe≈õ Sudoku.","Wygrana");
     			else
     			{
     			
@@ -60,7 +60,7 @@ class VerifyListener implements ActionListener{
 			       				  }
 	    					}
 	    				}
-    				m_view.showOption("W zaznaczonych obszarach Sudoku wykryto zdublowane wartoúci.");
+    				m_view.showOption("W zaznaczonych obszarach Sudoku wykryto zdublowane warto≈õci.");
     			};
 
     		}

@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
+encoding//controller/InfoListener.java=UTF-8
 encoding//controller/SudokuController.java=UTF-8
+encoding//controller/VerifyListener.java=UTF-8
 encoding//view/SudokuView.java=UTF-8
+encoding/<project>=UTF-8

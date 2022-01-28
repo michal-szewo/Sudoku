@@ -48,7 +48,7 @@ class VerifyListener implements ActionListener{
     			m_view.showOption("Na czerwono zaznaczono wartoœci spoza zakresu 1-9.");
     		else{
     			if (m_model.isValidSudoku(convertedValues))
-    				m_view.showMessage("Gratulacje!!! Rozwi¹za³eœ Sudoku.");
+    				m_view.showMessage("Gratulacje!!! Rozwi¹za³eœ Sudoku.","Wygrana");
     			else
     			{
     			

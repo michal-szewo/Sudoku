@@ -16,6 +16,6 @@ class InfoListener implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-        		m_view.showMessage("Nazwa: Sudoku Java Swing\nAutor: Micha³ Szeworski");
+        		m_view.showMessage("Nazwa: Sudoku Java Swing\nAutor: Micha³ Szeworski","O grze");
         	}
     	}

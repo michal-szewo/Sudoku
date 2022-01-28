@@ -151,8 +151,8 @@ public class SudokuView extends JFrame {
 	 }
 	 
 	 
-	 public void showMessage(String Message) {
-        JOptionPane.showMessageDialog(this, Message);
+	 public void showMessage(String Message, String Title) {
+        JOptionPane.showMessageDialog(this, Message, Title, JOptionPane.INFORMATION_MESSAGE);
 	 }
 	 public void showConfirm(String Message) {
 	        int confirm = JOptionPane.showConfirmDialog(this, Message , null, JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);

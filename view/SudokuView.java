@@ -1,3 +1,4 @@
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,8 +10,13 @@ import java.awt.Insets;
 import java.awt.Font;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
+import model.SudokuModel;
+
 import java.awt.event.*;
 
 
@@ -82,13 +88,13 @@ public class SudokuView extends JFrame {
 	            fields = new JTextField[BOARD_ROWS][BOARD_COLUMNS];
 	            
 
-	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,2,2));
+	            setLayout(new GridLayout(GRID_ROWS, GRID_COLUMNS,4,4));
 	            
 	            //panele agregujące kratki liczbowe
 	            for (int i=0 ; i < 9 ; i++) {
 		            JPanel panel = new JPanel(new GridLayout(3, 3));
-		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.GRAY, 2), new EmptyBorder(2, 2, 2, 2)));
-		            panel.setBorder(new LineBorder(Color.GRAY, 2));
+		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 3), new EmptyBorder(2, 2, 2, 2)));
+		            panel.setBorder(new LineBorder(Color.BLACK, 3));
 		            panels[i] = panel;
 		            add(panel);
 	            }
@@ -104,12 +110,14 @@ public class SudokuView extends JFrame {
 	            		field.setFont(f);
 	            		
 	            		
+	            		
 	            		fields[row][col] = field;
 	            		
 	            		//przypisanie kratki do panelu grupującego
 	            		int block = (((row / 3) * 3) + (col / 3));
 	            		
 	            		panels[block].add(field);
+	            		field.setBorder(new LineBorder(Color.BLACK, 1));
 	            	}
 	            }
 	            
@@ -125,10 +133,18 @@ public class SudokuView extends JFrame {
          	
          	for (int col = 0; col < BOARD_COLUMNS; col++) {
          		if (board[row][col] ==null)
-         			{fields[row][col].setText("");	
+         			{	
+         				fields[row][col].setEditable(true);
+         				fields[row][col].setText("");
+         				
+         				//fields[row][col].setBorder(new LineBorder(Color.BLACK, 1));
+         				
          		}
          			else {
          		fields[row][col].setText(board[row][col].toString());
+         		fields[row][col].setEditable(false);
+         		
+         		//fields[row][col].setBorder(new LineBorder(Color.GRAY, 1));
          		}
          	}
          	}

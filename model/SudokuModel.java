@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -104,7 +105,7 @@ public class SudokuModel {
 	
 	public static boolean isNumberInRange(Integer number) {
 		
-		if (number<=1 || number <=9) return true;
+		if (number>=1 && number <=9) return true;
 		return false;
 	}
 	

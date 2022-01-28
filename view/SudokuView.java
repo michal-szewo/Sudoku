@@ -22,13 +22,14 @@ import java.awt.event.*;
 
 public class SudokuView extends JFrame {
 	private SudokuModel m_model;
-	private JTextField[][] fields;
-    private JPanel[] panels;
-    private JButton newBtn;
-    private JButton checkBtn;
-    private JButton infoBtn;
+	JTextField[][] fields;
+    JPanel[] panels;
+    JButton newBtn;
+    JButton checkBtn;
+    JButton infoBtn;
     
-    Font f = new Font("Calibri", Font.BOLD, 25);
+    
+    public static final Font f = new Font("Calibri", Font.BOLD, 25);
     public static final int GRID_ROWS = 3;
 	public static final int GRID_COLUMNS = 3;
 	public static final int BOARD_ROWS = 9;
@@ -40,7 +41,7 @@ public class SudokuView extends JFrame {
 	m_model = model;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	setLayout(new BorderLayout());
-	getContentPane().add(new MenuPane(), BorderLayout.AFTER_LINE_ENDS);
+	getContentPane().add(new MenuPane(this), BorderLayout.AFTER_LINE_ENDS);
 	getContentPane().add(new SudokuBoard());
 	this.fillBoard(m_model.getBoard());
 	
@@ -50,32 +51,7 @@ public class SudokuView extends JFrame {
 	}
 
 
-	public class MenuPane extends JPanel {
-
-        public MenuPane() {
-            setBorder(new EmptyBorder(4, 4, 4, 4));
-            setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.weightx = 1;
-            
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.insets = new Insets(20,20,20,20);
-            
-            newBtn = new JButton("Nowa gra");
-            checkBtn = new JButton("Sprawdź");
-            infoBtn = new JButton("O grze");
-            
-            
-            add(newBtn, gbc);
-            gbc.gridy++;
-            add(checkBtn, gbc);
-            gbc.gridy++;
-            add(infoBtn, gbc);
-
-        }
-    }
+	
 	 
 	 
 	 public class SudokuBoard extends JPanel {
@@ -204,16 +180,16 @@ public class SudokuView extends JFrame {
 		 }
 		 
 	 }
-		 
-	 public void addNewGameListener(ActionListener ngl) {
-		 newBtn.addActionListener(ngl);
-	 }
-	
-	 public void addVerifyListener(ActionListener vl) {
-		checkBtn.addActionListener(vl);
-	 }
-	 public void addInfoListener(ActionListener in) {
-			infoBtn.addActionListener(in);
-		 }	
+	 
+	  public void addNewGameListener(ActionListener ngl) {
+	   		 newBtn.addActionListener(ngl);
+	   	 }
+	   	
+   	 public void addVerifyListener(ActionListener vl) {
+	   		checkBtn.addActionListener(vl);
+	   	 }
+   	 public void addInfoListener(ActionListener in) {
+   			infoBtn.addActionListener(in);
+   		 }	
 	 
 }

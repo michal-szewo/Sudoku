@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet.ColorAttribute;
 
+import org.w3c.dom.css.RGBColor;
+
 import model.SudokuModel;
 
 import java.awt.event.*;
@@ -73,14 +75,14 @@ public class SudokuView extends JFrame {
          				fields[row][col].setEditable(true);
          				fields[row][col].setText("");
          				
-         				//fields[row][col].setBorder(new LineBorder(Color.BLACK, 1));
+         				fields[row][col].setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 1),new LineBorder(new Color(254,213,66), 3)));
          				
          		}
          			else {
          		fields[row][col].setText(board[row][col].toString());
          		fields[row][col].setEditable(false);
          		
-         		//fields[row][col].setBorder(new LineBorder(Color.GRAY, 1));
+         		fields[row][col].setBorder(new LineBorder(Color.BLACK, 1));
          		}
          	}
          	}

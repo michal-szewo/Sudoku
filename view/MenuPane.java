@@ -8,14 +8,16 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 public class MenuPane extends JPanel {
-
+	private JButton newBtn;
+    private JButton checkBtn;
+    private JButton infoBtn;
 	    
-        public MenuPane(SudokuView view) {
+        public MenuPane() {
         	
         	
-        	view.newBtn = new JButton("Nowa gra");
-            view.checkBtn = new JButton("Sprawdź");
-            view.infoBtn = new JButton("O grze");
+        	newBtn = new JButton("Nowa gra");
+            checkBtn = new JButton("Sprawdź");
+            infoBtn = new JButton("O grze");
         	
             setBorder(new EmptyBorder(4, 4, 4, 4));
             setLayout(new GridBagLayout());
@@ -29,12 +31,22 @@ public class MenuPane extends JPanel {
             
             
             
-            add(view.newBtn, gbc);
+            add(newBtn, gbc);
             gbc.gridy++;
-            add(view.checkBtn, gbc);
+            add(checkBtn, gbc);
             gbc.gridy++;
-            add(view.infoBtn, gbc);
+            add(infoBtn, gbc);
 
+        }
+        
+        public JButton getCheckBtn() {
+        	return checkBtn;
+        }
+        public JButton getNewBtn() {
+        	return newBtn;
+        }
+        public JButton getInfoBtn() {
+        	return infoBtn;
         }
         
       

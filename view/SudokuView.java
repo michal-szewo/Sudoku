@@ -22,11 +22,11 @@ import java.awt.event.*;
 
 public class SudokuView extends JFrame {
 	private SudokuModel m_model;
-	JTextField[][] fields;
-    JPanel[] panels;
-    JButton newBtn;
-    JButton checkBtn;
-    JButton infoBtn;
+	private JTextField[][] fields;
+    private JPanel[] panels;
+    private JButton newBtn;
+    private JButton checkBtn;
+    private JButton infoBtn;
     
     
     public static final Font f = new Font("Calibri", Font.BOLD, 25);
@@ -41,8 +41,17 @@ public class SudokuView extends JFrame {
 	m_model = model;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	setLayout(new BorderLayout());
-	getContentPane().add(new MenuPane(this), BorderLayout.AFTER_LINE_ENDS);
-	getContentPane().add(new SudokuBoard(this));
+	MenuPane menu = new MenuPane();
+	getContentPane().add(menu, BorderLayout.AFTER_LINE_ENDS);
+	newBtn = menu.getNewBtn();  
+	checkBtn = menu.getCheckBtn();
+	infoBtn  = menu.getInfoBtn();
+	
+	SudokuBoard board = new SudokuBoard();
+	getContentPane().add(board);
+	fields = board.getFields();
+	panels = board.getPanels();
+	
 	this.fillBoard(m_model.getBoard());
 	
 	this.setMinimumSize(new Dimension(600, 500));
@@ -51,12 +60,8 @@ public class SudokuView extends JFrame {
 	}
 
 
+	//-----------------------------Metody
 	
-	 
-	 
-	 
-	 
-	 //Miejsce na metody
 	 public void fillBoard(Integer[][] board) {
 		 
 		 this.eraseInvalidFields();

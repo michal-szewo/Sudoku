@@ -10,13 +10,14 @@ import java.awt.GridLayout;
 import java.awt.Color;
 
 public class SudokuBoard extends JPanel {
+	private JTextField[][] fields;
+    private JPanel[] panels;
 
-
-	        public SudokuBoard(SudokuView view) {
+	        public SudokuBoard() {
 	            
 	            
-	            view.panels = new JPanel[9];
-	            view.fields = new JTextField[SudokuView.BOARD_ROWS][SudokuView.BOARD_COLUMNS];
+	            panels = new JPanel[9];
+	            fields = new JTextField[SudokuView.BOARD_ROWS][SudokuView.BOARD_COLUMNS];
 	            
 
 	            setLayout(new GridLayout(SudokuView.GRID_ROWS, SudokuView.GRID_COLUMNS,4,4));
@@ -26,7 +27,7 @@ public class SudokuBoard extends JPanel {
 		            JPanel panel = new JPanel(new GridLayout(3, 3));
 		            //panel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 3), new EmptyBorder(2, 2, 2, 2)));
 		            panel.setBorder(new LineBorder(Color.BLACK, 3));
-		            view.panels[i] = panel;
+		            panels[i] = panel;
 		            add(panel);
 	            }
 	            
@@ -42,16 +43,24 @@ public class SudokuBoard extends JPanel {
 	            		
 	            		
 	            		
-	            		view.fields[row][col] = field;
+	            		fields[row][col] = field;
 	            		
 	            		//przypisanie kratki do panelu grupującego
 	            		int block = (((row / 3) * 3) + (col / 3));
 	            		
-	            		view.panels[block].add(field);
+	            		panels[block].add(field);
 	            		field.setBorder(new LineBorder(Color.BLACK, 1));
 	            	}
 	            }
 	            
 				
 	        }
+	        
+	        public JTextField[][] getFields(){
+	        	return fields;
 	        }
+	        public JPanel[] getPanels(){
+	        	return panels;
+	        }
+	        
+        }

@@ -1,5 +1,9 @@
 import javax.swing.*;
 
+import controller.SudokuController;
+import model.SudokuModel;
+import view.SudokuView;
+
 
 public class Start {
 	public static final int GRID_ROWS = 3;

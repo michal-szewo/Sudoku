@@ -1,32 +1,20 @@
-import java.awt.event.*;
+package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import model.SudokuModel;
+import view.SudokuView;
 
-public class SudokuController {
+class VerifyListener implements ActionListener{
+	private SudokuModel m_model;
+	private SudokuView m_view;
+		
+    public VerifyListener(SudokuController contr) {
+    		m_model = contr.getSudokuModel();
+    		m_view = contr.getSudokuView();
+	}
 
-    private SudokuModel m_model;
-    private SudokuView  m_view;
-
-    //========================================================== constructor
-    /** Constructor */
-    public SudokuController(SudokuModel model, SudokuView view) {
-        m_model = model;
-        m_view  = view;
-
-        //... Add listeners to the view.
-        view.addNewGameListener(new NewGameListener());
-        view.addVerifyListener(new VerifyListener());
-        view.addInfoListener(new InfoListener());
-    }
-    
-    class NewGameListener implements ActionListener{
-    	public void actionPerformed(ActionEvent e) {
-    		m_model.changeBoard();
-    		m_view.fillBoard(m_model.getBoard());
-    	}
-    }
-    
-    class VerifyListener implements ActionListener{
-    	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
     		String[][] inputValues = m_view.getBoardValues();
     		Integer[][] convertedValues = new Integer[9][9];
     		boolean[][] invalidFields;
@@ -60,7 +48,7 @@ public class SudokuController {
     			m_view.showOption("Na czerwono zaznaczono wartości spoza zakresu 1-9.");
     		else{
     			if (m_model.isValidSudoku(convertedValues))
-    				m_view.showMessage("Gratulacje!!! Rozwiązałeś Sudoku.");
+    				m_view.showMessage("Gratulacje!!! Rozwiązałeś Sudoku.","Wygrana");
     			else
     			{
     			
@@ -78,12 +66,3 @@ public class SudokuController {
     		}
     	}
     }
-    
-    	class InfoListener implements ActionListener{
-        	public void actionPerformed(ActionEvent e) {
-        		m_view.showMessage("Nazwa: Sudoku Java Swing\nAutor: Michał Szeworski");
-        	}
-    	}
-  
-    
-}
